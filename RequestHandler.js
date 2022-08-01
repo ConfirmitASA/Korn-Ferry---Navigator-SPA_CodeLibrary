@@ -110,6 +110,9 @@ class RequestHandler {
 				
 				// Comparators (to be checked by default -- will be updated below
 				comparators: [], //["Internal.Wave:2019", "External.IndustryBenchmark", "External.HighPerformers"],
+              
+                // limit of active external benchmarks shown on the card
+                ExternalCardLimit: Config.ExternalCardLimit,
 				
 				// Dimensions
 				EngagementDimensionId: Config.EngagementDimensionId,
