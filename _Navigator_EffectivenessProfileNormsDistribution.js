@@ -1,8 +1,184 @@
 class EffectivenessProfileNormsDistribution {
 
-  	static var DistributionLookup = [
+  
+  static var DistributionLookup = {
+    'AllCompany_18TO20_Avg':     {'N': 4028164, 'Dist': {  'MostEffective': 47, 'Frustrated': 10, 'Detached': 14, 'LeastEffective': 29} },    // TOTAL: General Industry
+    'G10_18TO20_Avg':            {'N': 71983,   'Dist': {  'MostEffective': 49, 'Frustrated': 8,  'Detached': 15, 'LeastEffective': 27} },    // INDUSTRY: Oil and Gas
+    'G15_18TO20_Avg':            {'N': 203797,  'Dist': {  'MostEffective': 48, 'Frustrated': 9,  'Detached': 13, 'LeastEffective': 30} },    // INDUSTRY: Natural Materials
+    'G20_18TO20_Avg':            {'N': 317852,  'Dist': {  'MostEffective': 44, 'Frustrated': 10, 'Detached': 14, 'LeastEffective': 32} },    // INDUSTRY: Health and Life Sciences
+    'G25_18TO20_Avg':            {'N': 1713230, 'Dist': {  'MostEffective': 46, 'Frustrated': 10, 'Detached': 14, 'LeastEffective': 30} },    // INDUSTRY: Industrials
+    'JPN_G25_18TO20_Avg':        {'N': 464924,  'Dist': {  'MostEffective': 25, 'Frustrated': 11, 'Detached': 13, 'LeastEffective': 51} },    // COUNTRY x INDUSTRY: Japan Industrials
+    'GBR_G25_18TO20_Avg':        {'N': 76170,   'Dist': {  'MostEffective': 40, 'Frustrated': 11, 'Detached': 15, 'LeastEffective': 34} },    // COUNTRY x INDUSTRY: United Kingdom Industrials
+    'G30_18TO20_Avg':            {'N': 553888,  'Dist': {  'MostEffective': 49, 'Frustrated': 9,  'Detached': 13, 'LeastEffective': 29} },    // INDUSTRY: Consumer Goods
+    'JPN_G30_18TO20_Avg':        {'N': 199163,  'Dist': {  'MostEffective': 24, 'Frustrated': 13, 'Detached': 12, 'LeastEffective': 51} },    // COUNTRY x INDUSTRY: Japan Consumer Goods
+    'GBR_G30_18TO20_Avg':        {'N': 31401,   'Dist': {  'MostEffective': 42, 'Frustrated': 8,  'Detached': 15, 'LeastEffective': 34} },    // COUNTRY x INDUSTRY: United Kingdom Consumer Goods
+    'G35_18TO20_Avg':            {'N': 413909,  'Dist': {  'MostEffective': 50, 'Frustrated': 9,  'Detached': 13, 'LeastEffective': 28} },    // INDUSTRY: Consumer Services
+    'GBR_G35_18TO20_Avg':        {'N': 60338,   'Dist': {  'MostEffective': 44, 'Frustrated': 9,  'Detached': 13, 'LeastEffective': 33} },    // COUNTRY x INDUSTRY: United Kingdom Consumer Services
+    'G40_18TO20_Avg':            {'N': 327548,  'Dist': {  'MostEffective': 51, 'Frustrated': 10, 'Detached': 13, 'LeastEffective': 27} },    // INDUSTRY: Financials
+    'ASIA_G40_18TO20_Avg':       {'N': 92234,   'Dist': {  'MostEffective': 55, 'Frustrated': 8,  'Detached': 13, 'LeastEffective': 24} },    // REGION x INDUSTRY: Asia Financials
+    'EURO_G40_18TO20_Avg':       {'N': 123637,  'Dist': {  'MostEffective': 43, 'Frustrated': 11, 'Detached': 15, 'LeastEffective': 31} },    // REGION x INDUSTRY: Europe Financials
+    'GBR_G40_18TO20_Avg':        {'N': 22467,   'Dist': {  'MostEffective': 43, 'Frustrated': 13, 'Detached': 13, 'LeastEffective': 31} },    // COUNTRY x INDUSTRY: United Kingdom Financials
+    'USA_G40_18TO20_Avg':        {'N': 52150,   'Dist': {  'MostEffective': 58, 'Frustrated': 10, 'Detached': 11, 'LeastEffective': 21} },    // COUNTRY x INDUSTRY: United States of America Financials
+    'G45_18TO20_Avg':            {'N': 149740,  'Dist': {  'MostEffective': 49, 'Frustrated': 10, 'Detached': 16, 'LeastEffective': 24} },    // INDUSTRY: Utilities
+    'G50_18TO20_Avg':            {'N': 149040,  'Dist': {  'MostEffective': 53, 'Frustrated': 9,  'Detached': 13, 'LeastEffective': 25} },    // INDUSTRY: Communications
+    'G55_18TO20_Avg':            {'N': 66861,   'Dist': {  'MostEffective': 42, 'Frustrated': 12, 'Detached': 14, 'LeastEffective': 32} },    // INDUSTRY: Public Sector and NFP
+    'X9000_18TO20_Avg':          {'N': 2026209, 'Dist': {  'MostEffective': 47, 'Frustrated': 10, 'Detached': 14, 'LeastEffective': 29} },    // INDUSTRY: Manufacturing
+    'NORAM_X9000_18TO20_Avg':    {'N': 179532,  'Dist': {  'MostEffective': 50, 'Frustrated': 11, 'Detached': 12, 'LeastEffective': 26} },    // REGION x INDUSTRY: North America Manufacturing
+    'EURO_X9000_18TO20_Avg':     {'N': 549847,  'Dist': {  'MostEffective': 43, 'Frustrated': 10, 'Detached': 16, 'LeastEffective': 31} },    // REGION x INDUSTRY: Europe Manufacturing
+    'JPN_X9000_18TO20_Avg':      {'N': 463669,  'Dist': {  'MostEffective': 26, 'Frustrated': 11, 'Detached': 12, 'LeastEffective': 51} },    // COUNTRY x INDUSTRY: Japan Manufacturing
+    'GBR_X9000_18TO20_Avg':      {'N': 67478,   'Dist': {  'MostEffective': 39, 'Frustrated': 11, 'Detached': 15, 'LeastEffective': 35} },    // COUNTRY x INDUSTRY: United Kingdom Manufacturing
+    'USA_X9000_18TO20_Avg':      {'N': 158511,  'Dist': {  'MostEffective': 50, 'Frustrated': 11, 'Detached': 13, 'LeastEffective': 27} },    // COUNTRY x INDUSTRY: United States of America Manufacturing
+    'X9001_18TO20_Avg':          {'N': 638665,  'Dist': {  'MostEffective': 48, 'Frustrated': 11, 'Detached': 12, 'LeastEffective': 29} },    // INDUSTRY: Automobiles and Automobile Parts
+    'NORAM_X9001_18TO20_Avg':    {'N': 74626,   'Dist': {  'MostEffective': 53, 'Frustrated': 11, 'Detached': 11, 'LeastEffective': 25} },    // REGION x INDUSTRY: North America Automobiles and Automobile Parts
+    'G100_18TO20_Avg':           {'N': 71983,   'Dist': {  'MostEffective': 49, 'Frustrated': 8,  'Detached': 15, 'LeastEffective': 27} },    // INDUSTRY: Oil and Gas
+    'G150_18TO20_Avg':           {'N': 146792,  'Dist': {  'MostEffective': 50, 'Frustrated': 9,  'Detached': 14, 'LeastEffective': 27} },    // INDUSTRY: Natural Resources
+    'G151_18TO20_Avg':           {'N': 57005,   'Dist': {  'MostEffective': 46, 'Frustrated': 9,  'Detached': 12, 'LeastEffective': 32} },    // INDUSTRY: Chemicals
+    'G200_18TO20_Avg':           {'N': 179237,  'Dist': {  'MostEffective': 45, 'Frustrated': 11, 'Detached': 14, 'LeastEffective': 30} },    // INDUSTRY: Life Sciences
+    'G201_18TO20_Avg':           {'N': 136842,  'Dist': {  'MostEffective': 42, 'Frustrated': 8,  'Detached': 15, 'LeastEffective': 36} },    // INDUSTRY: Healthcare
+    'G250_18TO20_Avg':           {'N': 143428,  'Dist': {  'MostEffective': 58, 'Frustrated': 9,  'Detached': 12, 'LeastEffective': 21} },    // INDUSTRY: Construction and Materials
+    'G251_18TO20_Avg':           {'N': 819708,  'Dist': {  'MostEffective': 47, 'Frustrated': 10, 'Detached': 14, 'LeastEffective': 30} },    // INDUSTRY: Industrial Goods
+    'JPN_G251_18TO20_Avg':       {'N': 182189,  'Dist': {  'MostEffective': 28, 'Frustrated': 11, 'Detached': 12, 'LeastEffective': 48} },    // COUNTRY x INDUSTRY: Japan Industrial Goods
+    'GBR_G251_18TO20_Avg':       {'N': 21637,   'Dist': {  'MostEffective': 38, 'Frustrated': 11, 'Detached': 15, 'LeastEffective': 35} },    // COUNTRY x INDUSTRY: United Kingdom Industrial Goods
+    'G252_18TO20_Avg':           {'N': 259949,  'Dist': {  'MostEffective': 44, 'Frustrated': 10, 'Detached': 15, 'LeastEffective': 32} },    // INDUSTRY: High Technology
+    'JPN_G252_18TO20_Avg':       {'N': 42343,   'Dist': {  'MostEffective': 23, 'Frustrated': 9,  'Detached': 13, 'LeastEffective': 55} },    // COUNTRY x INDUSTRY: Japan High Technology
+    'GBR_G252_18TO20_Avg':       {'N': 8290,    'Dist': {  'MostEffective': 36, 'Frustrated': 11, 'Detached': 15, 'LeastEffective': 38} },    // COUNTRY x INDUSTRY: United Kingdom High Technology
+    'G253_18TO20_Avg':           {'N': 213320,  'Dist': {  'MostEffective': 39, 'Frustrated': 10, 'Detached': 14, 'LeastEffective': 37} },    // INDUSTRY: Transportation
+    'G254_18TO20_Avg':           {'N': 144819,  'Dist': {  'MostEffective': 44, 'Frustrated': 11, 'Detached': 14, 'LeastEffective': 31} },    // INDUSTRY: Services
+    'G300_18TO20_Avg':           {'N': 222688,  'Dist': {  'MostEffective': 48, 'Frustrated': 9,  'Detached': 14, 'LeastEffective': 29} },    // INDUSTRY: Fast Moving Consumer Goods
+    'G301_18TO20_Avg':           {'N': 319578,  'Dist': {  'MostEffective': 50, 'Frustrated': 10, 'Detached': 12, 'LeastEffective': 28} },    // INDUSTRY: Consumer Durables
+    'G350_18TO20_Avg':           {'N': 353307,  'Dist': {  'MostEffective': 49, 'Frustrated': 11, 'Detached': 13, 'LeastEffective': 27} },    // INDUSTRY: Retail
+    'EURO_G350_18TO20_Avg':      {'N': 48371,   'Dist': {  'MostEffective': 39, 'Frustrated': 11, 'Detached': 14, 'LeastEffective': 36} },    // REGION x INDUSTRY: Europe Retail
+    'G351_18TO20_Avg':           {'N': 60602,   'Dist': {  'MostEffective': 52, 'Frustrated': 7,  'Detached': 13, 'LeastEffective': 29} },    // INDUSTRY: Leisure and Hospitality
+    'G400_18TO20_Avg':           {'N': 171054,  'Dist': {  'MostEffective': 49, 'Frustrated': 9,  'Detached': 13, 'LeastEffective': 28} },    // INDUSTRY: Banks
+    'EURO_G400_18TO20_Avg':      {'N': 83193,   'Dist': {  'MostEffective': 45, 'Frustrated': 10, 'Detached': 16, 'LeastEffective': 30} },    // REGION x INDUSTRY: Europe Banks
+    'ASIAPAC_G400_18TO20_Avg':   {'N': 57037,   'Dist': {  'MostEffective': 52, 'Frustrated': 9,  'Detached': 11, 'LeastEffective': 28} },    // REGION x INDUSTRY: Asia/Pacific Banks
+    'G401_18TO20_Avg':           {'N': 66338,   'Dist': {  'MostEffective': 48, 'Frustrated': 10, 'Detached': 13, 'LeastEffective': 28} },    // INDUSTRY: Insurance
+    'G402_18TO20_Avg':           {'N': 70432,   'Dist': {  'MostEffective': 52, 'Frustrated': 10, 'Detached': 13, 'LeastEffective': 26} },    // INDUSTRY: Financial Services
+    'GBR_G402_18TO20_Avg':       {'N': 5476,    'Dist': {  'MostEffective': 42, 'Frustrated': 13, 'Detached': 13, 'LeastEffective': 31} },    // COUNTRY x INDUSTRY: United Kingdom Financial Services
+    'USA_G402_18TO20_Avg':       {'N': 14127,   'Dist': {  'MostEffective': 58, 'Frustrated': 10, 'Detached': 10, 'LeastEffective': 21} },    // COUNTRY x INDUSTRY: United States of America Financial Services
+    'G450_18TO20_Avg':           {'N': 149740,  'Dist': {  'MostEffective': 49, 'Frustrated': 10, 'Detached': 16, 'LeastEffective': 24} },    // INDUSTRY: Utilities
+    'G500_18TO20_Avg':           {'N': 108829,  'Dist': {  'MostEffective': 56, 'Frustrated': 9,  'Detached': 11, 'LeastEffective': 24} },    // INDUSTRY: Telecommunications
+    'G550_18TO20_Avg':           {'N': 19759,   'Dist': {  'MostEffective': 42, 'Frustrated': 12, 'Detached': 14, 'LeastEffective': 32} },    // INDUSTRY: Public Sector
+    'G551_18TO20_Avg':           {'N': 41531,   'Dist': {  'MostEffective': 47, 'Frustrated': 9,  'Detached': 15, 'LeastEffective': 29} },    // INDUSTRY: Education
+    'G552_18TO20_Avg':           {'N': 5571,    'Dist': {  'MostEffective': 38, 'Frustrated': 14, 'Detached': 15, 'LeastEffective': 33} },    // INDUSTRY: Not-for-Profit
+    'G1003_18TO20_Avg':          {'N': 19748,   'Dist': {  'MostEffective': 47, 'Frustrated': 7,  'Detached': 17, 'LeastEffective': 30} },    // INDUSTRY: Oil Field Services
+    'G2000_18TO20_Avg':          {'N': 150560,  'Dist': {  'MostEffective': 46, 'Frustrated': 12, 'Detached': 14, 'LeastEffective': 28} },    // INDUSTRY: Pharmaceuticals
+    'G2002_18TO20_Avg':          {'N': 15435,   'Dist': {  'MostEffective': 41, 'Frustrated': 9,  'Detached': 15, 'LeastEffective': 36} },    // INDUSTRY: Medical equipment and supplies
+    'G2500_18TO20_Avg':          {'N': 88800,   'Dist': {  'MostEffective': 58, 'Frustrated': 9,  'Detached': 12, 'LeastEffective': 21} },    // INDUSTRY: Construction
+    'G2501_18TO20_Avg':          {'N': 48481,   'Dist': {  'MostEffective': 58, 'Frustrated': 8,  'Detached': 13, 'LeastEffective': 20} },    // INDUSTRY: Building Materials
+    'G2511_18TO20_Avg':          {'N': 560383,  'Dist': {  'MostEffective': 52, 'Frustrated': 11, 'Detached': 11, 'LeastEffective': 26} },    // INDUSTRY: Automobiles
+    'G2512_18TO20_Avg':          {'N': 76334,   'Dist': {  'MostEffective': 44, 'Frustrated': 9,  'Detached': 14, 'LeastEffective': 33} },    // INDUSTRY: Automobile Parts
+    'G2513_18TO20_Avg':          {'N': 12480,   'Dist': {  'MostEffective': 48, 'Frustrated': 9,  'Detached': 15, 'LeastEffective': 28} },    // INDUSTRY: Industrial Machinery
+    'G2515_18TO20_Avg':          {'N': 115977,  'Dist': {  'MostEffective': 43, 'Frustrated': 10, 'Detached': 15, 'LeastEffective': 32} },    // INDUSTRY: Diversified Industrials
+    'G2521_18TO20_Avg':          {'N': 53095,   'Dist': {  'MostEffective': 42, 'Frustrated': 9,  'Detached': 14, 'LeastEffective': 36} },    // INDUSTRY: Technology
+    'G2522_18TO20_Avg':          {'N': 26871,   'Dist': {  'MostEffective': 48, 'Frustrated': 8,  'Detached': 17, 'LeastEffective': 27} },    // INDUSTRY: Software
+    'G2534_18TO20_Avg':          {'N': 29567,   'Dist': {  'MostEffective': 43, 'Frustrated': 10, 'Detached': 14, 'LeastEffective': 33} },    // INDUSTRY: Transportation Infrastructure
+    'G2549_18TO20_Avg':          {'N': 123704,  'Dist': {  'MostEffective': 43, 'Frustrated': 11, 'Detached': 14, 'LeastEffective': 31} },    // INDUSTRY: Other Professional Services
+    'G3000_18TO20_Avg':          {'N': 143691,  'Dist': {  'MostEffective': 47, 'Frustrated': 8,  'Detached': 14, 'LeastEffective': 31} },    // INDUSTRY: Food and Drink
+    'G3510_18TO20_Avg':          {'N': 17020,   'Dist': {  'MostEffective': 58, 'Frustrated': 6,  'Detached': 13, 'LeastEffective': 24} },    // INDUSTRY: Hotels
+    'G4002_18TO20_Avg':          {'N': 67065,   'Dist': {  'MostEffective': 54, 'Frustrated': 9,  'Detached': 11, 'LeastEffective': 26} },    // INDUSTRY: Retail/Corporate/Commercial Banks
+    'G4020_18TO20_Avg':          {'N': 14547,   'Dist': {  'MostEffective': 59, 'Frustrated': 11, 'Detached': 12, 'LeastEffective': 18} },    // INDUSTRY: Real Estate
+    'G4022_18TO20_Avg':          {'N': 17586,   'Dist': {  'MostEffective': 47, 'Frustrated': 10, 'Detached': 12, 'LeastEffective': 30} },    // INDUSTRY: Asset Management
+    'G4029_18TO20_Avg':          {'N': 20542,   'Dist': {  'MostEffective': 51, 'Frustrated': 9,  'Detached': 13, 'LeastEffective': 28} },    // INDUSTRY: Other Financial Services
+    'G4500_18TO20_Avg':          {'N': 53514,   'Dist': {  'MostEffective': 50, 'Frustrated': 12, 'Detached': 16, 'LeastEffective': 22} },    // INDUSTRY: Electricity and Gas
+    'G5001_18TO20_Avg':          {'N': 108829,  'Dist': {  'MostEffective': 56, 'Frustrated': 9,  'Detached': 11, 'LeastEffective': 24} },    // INDUSTRY: Integrated Telecommunications
+    'G5501_18TO20_Avg':          {'N': 7072,    'Dist': {  'MostEffective': 38, 'Frustrated': 15, 'Detached': 16, 'LeastEffective': 31} },    // INDUSTRY: National Government Agencies
+    'G5514_18TO20_Avg':          {'N': 3866,    'Dist': {  'MostEffective': 46, 'Frustrated': 9,  'Detached': 16, 'LeastEffective': 29} },    // INDUSTRY: Educational services and support
+    'G5520_18TO20_Avg':          {'N': 1340,    'Dist': {  'MostEffective': 33, 'Frustrated': 15, 'Detached': 14, 'LeastEffective': 38} },    // INDUSTRY: Membership Organizations
+    'G5521_18TO20_Avg':          {'N': 3856,    'Dist': {  'MostEffective': 41, 'Frustrated': 13, 'Detached': 16, 'LeastEffective': 30} },    // INDUSTRY: Charitable and Religious Organizations and NGOs
+    'AFRIC_18TO20_Avg':          {'N': 83270,   'Dist': {  'MostEffective': 52, 'Frustrated': 9,  'Detached': 12, 'LeastEffective': 27} },    // REGION: Africa
+    'LATCSAMER_18TO20_Avg':      {'N': 160519,  'Dist': {  'MostEffective': 58, 'Frustrated': 12, 'Detached': 9,  'LeastEffective': 21} },    // REGION: South America
+    'OCEAN_18TO20_Avg':          {'N': 80381,   'Dist': {  'MostEffective': 46, 'Frustrated': 12, 'Detached': 14, 'LeastEffective': 29} },    // REGION: Oceania
+    'AFRICW_18TO20_Avg':         {'N': 5569,    'Dist': {  'MostEffective': 51, 'Frustrated': 8,  'Detached': 18, 'LeastEffective': 22} },    // REGION: Western Africa
+    'LATCCENT_18TO20_Avg':       {'N': 71461,   'Dist': {  'MostEffective': 59, 'Frustrated': 10, 'Detached': 11, 'LeastEffective': 20} },    // REGION: Central America
+    'AFRICE_18TO20_Avg':         {'N': 18874,   'Dist': {  'MostEffective': 55, 'Frustrated': 8,  'Detached': 12, 'LeastEffective': 25} },    // REGION: Eastern Africa
+    'AFRICN_18TO20_Avg':         {'N': 41457,   'Dist': {  'MostEffective': 51, 'Frustrated': 12, 'Detached': 11, 'LeastEffective': 26} },    // REGION: Northern Africa
+    'AFRICS_18TO20_Avg':         {'N': 15006,   'Dist': {  'MostEffective': 50, 'Frustrated': 10, 'Detached': 11, 'LeastEffective': 29} },    // REGION: Southern Africa
+    'NORAM_18TO20_Avg':          {'N': 569928,  'Dist': {  'MostEffective': 51, 'Frustrated': 11, 'Detached': 12, 'LeastEffective': 26} },    // REGION: North America
+    'ASIAE_18TO20_Avg':          {'N': 1033959, 'Dist': {  'MostEffective': 42, 'Frustrated': 9,  'Detached': 13, 'LeastEffective': 36} },    // REGION: Eastern Asia
+    'ASIAS_18TO20_Avg':          {'N': 74066,   'Dist': {  'MostEffective': 65, 'Frustrated': 8,  'Detached': 11, 'LeastEffective': 17} },    // REGION: Southern Asia
+    'ASIASE_18TO20_Avg':         {'N': 185606,  'Dist': {  'MostEffective': 58, 'Frustrated': 7,  'Detached': 14, 'LeastEffective': 21} },    // REGION: South-Eastern Asia
+    'EUROS_18TO20_Avg':          {'N': 198070,  'Dist': {  'MostEffective': 44, 'Frustrated': 12, 'Detached': 11, 'LeastEffective': 33} },    // REGION: Southern Europe
+    'OCEANANZ_18TO20_Avg':       {'N': 79595,   'Dist': {  'MostEffective': 46, 'Frustrated': 12, 'Detached': 14, 'LeastEffective': 29} },    // REGION: Australia and New Zealand
+    'ASIA_18TO20_Avg':           {'N': 1451974, 'Dist': {  'MostEffective': 51, 'Frustrated': 9,  'Detached': 13, 'LeastEffective': 28} },    // REGION: Asia
+    'ASIAC_18TO20_Avg':          {'N': 7749,    'Dist': {  'MostEffective': 58, 'Frustrated': 6,  'Detached': 16, 'LeastEffective': 20} },    // REGION: Central Asia
+    'ASIAW_18TO20_Avg':          {'N': 146752,  'Dist': {  'MostEffective': 55, 'Frustrated': 10, 'Detached': 12, 'LeastEffective': 22} },    // REGION: Western Asia
+    'EURO_18TO20_Avg':           {'N': 1078946, 'Dist': {  'MostEffective': 43, 'Frustrated': 10, 'Detached': 16, 'LeastEffective': 31} },    // REGION: Europe
+    'EUROE_18TO20_Avg':          {'N': 326151,  'Dist': {  'MostEffective': 44, 'Frustrated': 7,  'Detached': 19, 'LeastEffective': 29} },    // REGION: Eastern Europe
+    'EURON_18TO20_Avg':          {'N': 339888,  'Dist': {  'MostEffective': 43, 'Frustrated': 11, 'Detached': 15, 'LeastEffective': 31} },    // REGION: Northern Europe
+    'EUROW_18TO20_Avg':          {'N': 229789,  'Dist': {  'MostEffective': 41, 'Frustrated': 12, 'Detached': 16, 'LeastEffective': 32} },    // REGION: Western Europe
+    'AFRICSSAH_18TO20_Avg':      {'N': 41480,   'Dist': {  'MostEffective': 53, 'Frustrated': 9,  'Detached': 12, 'LeastEffective': 26} },    // REGION: Sub-Saharan Africa
+    'LATC_18TO20_Avg':           {'N': 234291,  'Dist': {  'MostEffective': 58, 'Frustrated': 11, 'Detached': 11, 'LeastEffective': 21} },    // REGION: Latin America and the Caribbean
+    'MIDEGCC_18TO20_Avg':        {'N': 80546,   'Dist': {  'MostEffective': 58, 'Frustrated': 9,  'Detached': 12, 'LeastEffective': 21} },    // REGION: Gulf Cooperation Council (GCC)
+    'EUROBALT_18TO20_Avg':       {'N': 7404,    'Dist': {  'MostEffective': 40, 'Frustrated': 5,  'Detached': 26, 'LeastEffective': 29} },    // REGION: Baltic
+    'EUROBRIT_18TO20_Avg':       {'N': 244235,  'Dist': {  'MostEffective': 43, 'Frustrated': 11, 'Detached': 14, 'LeastEffective': 32} },    // REGION: British and Irish Isles
+    'EUROSCAN_18TO20_Avg':       {'N': 93890,   'Dist': {  'MostEffective': 42, 'Frustrated': 12, 'Detached': 16, 'LeastEffective': 30} },    // REGION: Scandinavia
+    'MIDE_18TO20_Avg':           {'N': 84185,   'Dist': {  'MostEffective': 57, 'Frustrated': 10, 'Detached': 12, 'LeastEffective': 21} },    // REGION: Middle East
+    'MIDENA_18TO20_Avg':         {'N': 126059,  'Dist': {  'MostEffective': 56, 'Frustrated': 10, 'Detached': 12, 'LeastEffective': 22} },    // REGION: Middle East/North Africa
+    'MIDEA_18TO20_Avg':          {'N': 184870,  'Dist': {  'MostEffective': 55, 'Frustrated': 10, 'Detached': 12, 'LeastEffective': 24} },    // REGION: Middle East/Africa
+    'ASIAPAC_18TO20_Avg':        {'N': 1527293, 'Dist': {  'MostEffective': 50, 'Frustrated': 9,  'Detached': 13, 'LeastEffective': 28} },    // REGION: Asia/Pacific
+    'ARG_18TO20_Avg':            {'N': 20388,   'Dist': {  'MostEffective': 56, 'Frustrated': 12, 'Detached': 8,  'LeastEffective': 23} },    // COUNTRY: Argentina
+    'AUS_18TO20_Avg':            {'N': 75420,   'Dist': {  'MostEffective': 46, 'Frustrated': 12, 'Detached': 13, 'LeastEffective': 30} },    // COUNTRY: Australia
+    'AUT_18TO20_Avg':            {'N': 4293,    'Dist': {  'MostEffective': 50, 'Frustrated': 10, 'Detached': 17, 'LeastEffective': 23} },    // COUNTRY: Austria
+    'BEL_18TO20_Avg':            {'N': 14534,   'Dist': {  'MostEffective': 43, 'Frustrated': 13, 'Detached': 14, 'LeastEffective': 31} },    // COUNTRY: Belgium
+    'BRA_18TO20_Avg':            {'N': 97292,   'Dist': {  'MostEffective': 57, 'Frustrated': 13, 'Detached': 8,  'LeastEffective': 22} },    // COUNTRY: Brazil
+    'BGR_18TO20_Avg':            {'N': 6462,    'Dist': {  'MostEffective': 47, 'Frustrated': 6,  'Detached': 21, 'LeastEffective': 27} },    // COUNTRY: Bulgaria
+    'CAN_18TO20_Avg':            {'N': 62339,   'Dist': {  'MostEffective': 51, 'Frustrated': 11, 'Detached': 13, 'LeastEffective': 26} },    // COUNTRY: Canada
+    'CHL_18TO20_Avg':            {'N': 7119,    'Dist': {  'MostEffective': 62, 'Frustrated': 13, 'Detached': 7,  'LeastEffective': 19} },    // COUNTRY: Chile
+    'CHN_18TO20_Avg':            {'N': 232751,  'Dist': {  'MostEffective': 58, 'Frustrated': 7,  'Detached': 12, 'LeastEffective': 23} },    // COUNTRY: China
+    'TWN_18TO20_Avg':            {'N': 6634,    'Dist': {  'MostEffective': 55, 'Frustrated': 8,  'Detached': 14, 'LeastEffective': 23} },    // COUNTRY: Taiwan (Province of China)
+    'CZE_18TO20_Avg':            {'N': 17143,   'Dist': {  'MostEffective': 41, 'Frustrated': 5,  'Detached': 24, 'LeastEffective': 30} },    // COUNTRY: Czech Republic (Czechia)
+    'DNK_18TO20_Avg':            {'N': 9784,    'Dist': {  'MostEffective': 42, 'Frustrated': 14, 'Detached': 16, 'LeastEffective': 28} },    // COUNTRY: Denmark
+    'FIN_18TO20_Avg':            {'N': 32188,   'Dist': {  'MostEffective': 47, 'Frustrated': 12, 'Detached': 16, 'LeastEffective': 26} },    // COUNTRY: Finland
+    'FRA_18TO20_Avg':            {'N': 109290,  'Dist': {  'MostEffective': 40, 'Frustrated': 13, 'Detached': 13, 'LeastEffective': 34} },    // COUNTRY: France
+    'DEU_18TO20_Avg':            {'N': 64207,   'Dist': {  'MostEffective': 42, 'Frustrated': 11, 'Detached': 17, 'LeastEffective': 30} },    // COUNTRY: Germany
+    'GHA_18TO20_Avg':            {'N': 4157,    'Dist': {  'MostEffective': 51, 'Frustrated': 6,  'Detached': 20, 'LeastEffective': 22} },    // COUNTRY: Ghana
+    'GRC_18TO20_Avg':            {'N': 5607,    'Dist': {  'MostEffective': 47, 'Frustrated': 15, 'Detached': 10, 'LeastEffective': 28} },    // COUNTRY: Greece
+    'HKG_18TO20_Avg':            {'N': 9263,    'Dist': {  'MostEffective': 43, 'Frustrated': 7,  'Detached': 16, 'LeastEffective': 35} },    // COUNTRY: Hong Kong Special Administrative Region of China
+    'HUN_18TO20_Avg':            {'N': 6437,    'Dist': {  'MostEffective': 41, 'Frustrated': 12, 'Detached': 14, 'LeastEffective': 32} },    // COUNTRY: Hungary
+    'IND_18TO20_Avg':            {'N': 72742,   'Dist': {  'MostEffective': 64, 'Frustrated': 8,  'Detached': 11, 'LeastEffective': 17} },    // COUNTRY: India
+    'IDN_18TO20_Avg':            {'N': 42948,   'Dist': {  'MostEffective': 71, 'Frustrated': 6,  'Detached': 12, 'LeastEffective': 12} },    // COUNTRY: Indonesia
+    'IRL_18TO20_Avg':            {'N': 11590,   'Dist': {  'MostEffective': 43, 'Frustrated': 9,  'Detached': 14, 'LeastEffective': 33} },    // COUNTRY: Ireland
+    'ISR_18TO20_Avg':            {'N': 16440,   'Dist': {  'MostEffective': 52, 'Frustrated': 13, 'Detached': 12, 'LeastEffective': 23} },    // COUNTRY: Israel
+    'ITA_18TO20_Avg':            {'N': 14977,   'Dist': {  'MostEffective': 42, 'Frustrated': 12, 'Detached': 10, 'LeastEffective': 35} },    // COUNTRY: Italy
+    'JPN_18TO20_Avg':            {'N': 735114,  'Dist': {  'MostEffective': 27, 'Frustrated': 11, 'Detached': 13, 'LeastEffective': 49} },    // COUNTRY: Japan
+    'KAZ_18TO20_Avg':            {'N': 7504,    'Dist': {  'MostEffective': 58, 'Frustrated': 6,  'Detached': 17, 'LeastEffective': 19} },    // COUNTRY: Kazakhstan
+    'KOR_18TO20_Avg':            {'N': 47381,   'Dist': {  'MostEffective': 34, 'Frustrated': 13, 'Detached': 18, 'LeastEffective': 36} },    // COUNTRY: Korea
+    'LTU_18TO20_Avg':            {'N': 3550,    'Dist': {  'MostEffective': 44, 'Frustrated': 4,  'Detached': 27, 'LeastEffective': 25} },    // COUNTRY: Lithuania
+    'MYS_18TO20_Avg':            {'N': 44609,   'Dist': {  'MostEffective': 51, 'Frustrated': 7,  'Detached': 16, 'LeastEffective': 26} },    // COUNTRY: Malaysia
+    'MUS_18TO20_Avg':            {'N': 13120,   'Dist': {  'MostEffective': 55, 'Frustrated': 7,  'Detached': 11, 'LeastEffective': 26} },    // COUNTRY: Mauritius
+    'MEX_18TO20_Avg':            {'N': 68190,   'Dist': {  'MostEffective': 60, 'Frustrated': 9,  'Detached': 12, 'LeastEffective': 20} },    // COUNTRY: Mexico
+    'NLD_18TO20_Avg':            {'N': 15691,   'Dist': {  'MostEffective': 40, 'Frustrated': 12, 'Detached': 15, 'LeastEffective': 33} },    // COUNTRY: Netherlands
+    'NZL_18TO20_Avg':            {'N': 10138,   'Dist': {  'MostEffective': 41, 'Frustrated': 12, 'Detached': 15, 'LeastEffective': 31} },    // COUNTRY: New Zealand
+    'NOR_18TO20_Avg':            {'N': 13963,   'Dist': {  'MostEffective': 53, 'Frustrated': 10, 'Detached': 14, 'LeastEffective': 23} },    // COUNTRY: Norway
+    'PER_18TO20_Avg':            {'N': 11035,   'Dist': {  'MostEffective': 65, 'Frustrated': 9,  'Detached': 8,  'LeastEffective': 18} },    // COUNTRY: Peru
+    'PHL_18TO20_Avg':            {'N': 17870,   'Dist': {  'MostEffective': 68, 'Frustrated': 6,  'Detached': 12, 'LeastEffective': 15} },    // COUNTRY: Philippines
+    'POL_18TO20_Avg':            {'N': 57809,   'Dist': {  'MostEffective': 39, 'Frustrated': 7,  'Detached': 20, 'LeastEffective': 35} },    // COUNTRY: Poland
+    'PRT_18TO20_Avg':            {'N': 26630,   'Dist': {  'MostEffective': 42, 'Frustrated': 11, 'Detached': 12, 'LeastEffective': 34} },    // COUNTRY: Portugal
+    'QAT_18TO20_Avg':            {'N': 4349,    'Dist': {  'MostEffective': 66, 'Frustrated': 8,  'Detached': 13, 'LeastEffective': 13} },    // COUNTRY: Qatar
+    'ROU_18TO20_Avg':            {'N': 38489,   'Dist': {  'MostEffective': 53, 'Frustrated': 7,  'Detached': 15, 'LeastEffective': 25} },    // COUNTRY: Romania
+    'RUS_18TO20_Avg':            {'N': 136344,  'Dist': {  'MostEffective': 54, 'Frustrated': 9,  'Detached': 16, 'LeastEffective': 21} },    // COUNTRY: Russian Federation
+    'SAU_18TO20_Avg':            {'N': 37440,   'Dist': {  'MostEffective': 55, 'Frustrated': 10, 'Detached': 12, 'LeastEffective': 23} },    // COUNTRY: Saudi Arabia
+    'SRB_18TO20_Avg':            {'N': 4670,    'Dist': {  'MostEffective': 52, 'Frustrated': 8,  'Detached': 13, 'LeastEffective': 26} },    // COUNTRY: Serbia
+    'SGP_18TO20_Avg':            {'N': 12269,   'Dist': {  'MostEffective': 50, 'Frustrated': 7,  'Detached': 15, 'LeastEffective': 28} },    // COUNTRY: Singapore
+    'SVK_18TO20_Avg':            {'N': 8538, '   Dist': {  'MostEffective': 41, 'Frustrated': 8,  'Detached': 22, 'LeastEffective': 29} },    // COUNTRY: Slovakia
+    'VNM_18TO20_Avg':            {'N': 22345,   'Dist': {  'MostEffective': 67, 'Frustrated': 7,  'Detached': 11, 'LeastEffective': 16} },    // COUNTRY: Vietnam
+    'ZAF_18TO20_Avg':            {'N': 14271,   'Dist': {  'MostEffective': 53, 'Frustrated': 10, 'Detached': 11, 'LeastEffective': 26} },    // COUNTRY: South Africa
+    'ESP_18TO20_Avg':            {'N': 126477,  'Dist': {  'MostEffective': 46, 'Frustrated': 14, 'Detached': 10, 'LeastEffective': 30} },    // COUNTRY: Spain
+    'SWE_18TO20_Avg':            {'N': 36123,   'Dist': {  'MostEffective': 44, 'Frustrated': 11, 'Detached': 15, 'LeastEffective': 30} },    // COUNTRY: Sweden
+    'CHE_18TO20_Avg':            {'N': 15352,   'Dist': {  'MostEffective': 47, 'Frustrated': 12, 'Detached': 16, 'LeastEffective': 25} },    // COUNTRY: Switzerland
+    'THA_18TO20_Avg':            {'N': 38910,   'Dist': {  'MostEffective': 53, 'Frustrated': 10, 'Detached': 16, 'LeastEffective': 21} },    // COUNTRY: Thailand
+    'ARE_18TO20_Avg':            {'N': 23221,   'Dist': {  'MostEffective': 64, 'Frustrated': 7,  'Detached': 12, 'LeastEffective': 17} },    // COUNTRY: United Arab Emirates
+    'TUR_18TO20_Avg':            {'N': 37810,   'Dist': {  'MostEffective': 52, 'Frustrated': 13, 'Detached': 10, 'LeastEffective': 24} },    // COUNTRY: Turkey
+    'UKR_18TO20_Avg':            {'N': 48553,   'Dist': {  'MostEffective': 53, 'Frustrated': 9,  'Detached': 19, 'LeastEffective': 20} },    // COUNTRY: Ukraine
+    'EGY_18TO20_Avg':            {'N': 19880,   'Dist': {  'MostEffective': 50, 'Frustrated': 11, 'Detached': 12, 'LeastEffective': 28} },    // COUNTRY: Egypt
+    'GBR_18TO20_Avg':            {'N': 231891,  'Dist': {  'MostEffective': 43, 'Frustrated': 11, 'Detached': 14, 'LeastEffective': 32} },    // COUNTRY: United Kingdom
+    'USA_18TO20_Avg':            {'N': 506490,  'Dist': {  'MostEffective': 51, 'Frustrated': 11, 'Detached': 12, 'LeastEffective': 25} },    // COUNTRY: United States of America
+    'HP_18TO20_Avg':             {'N': 229957,  'Dist': {  'MostEffective': 56, 'Frustrated': 10, 'Detached': 12, 'LeastEffective': 22} }     // TOTAL: High Performing   
+  }
+  /*	static var DistributionLookup = [
       	//2017-2019 norms
-        ['AllCompany_A_17TO19_Avg',          4442345, 46, 10, 14, 30], // TOTAL: General Industry
+        ['AllCompany_18TO20_Avg',          4442345, 46, 10, 14, 30], // TOTAL: General Industry
         ['G10_A_17TO19_Avg',                   91652, 48, 10, 15, 27], // INDUSTRY: Oil and Gas
         ['G15_A_17TO19_Avg',                  234723, 46,  9, 13, 31], // INDUSTRY: Natural Materials
         ['G20_A_17TO19_Avg',                  400939, 44, 10, 14, 31], // INDUSTRY: Health and Life Sciences
@@ -196,10 +372,14 @@ class EffectivenessProfileNormsDistribution {
         ['EGY_A_17TO19_Avg',                   21725, 49, 10, 12, 29], // COUNTRY: Egypt
         ['GBR_A_17TO19_Avg',                  290259, 41, 11, 14, 34], // COUNTRY: United Kingdom
         ['USA_A_17TO19_Avg',                  677429, 51, 11, 12, 26], // COUNTRY: United States of America
-        ['HP_A_17TO19_Avg',                   402911, 55, 11, 12, 23]  // TOTAL: High Performing
-	];
-	
-	static function GetByNormId (norm_id) {
+        ['HP_18TO20_Avg',                     402911, 55, 11, 12, 23], // TOTAL: High Performing
+        ['Mercado_Regional_2022',               9999, 40, 40, 10, 10], // Test
+        ['ARE_18TO20_Avg',                      9999, 40, 40, 10, 10], // Test1
+      //  ['AUS_18TO20_P90',                      9999, 40, 40, 10, 10], // Test2
+        ['FIN_18TO20_P75',                      9999, 40, 40, 10, 10]  // Test3
+	];*/
+
+	/*static function GetByNormId (norm_id) {
 		for (var i=0; i<DistributionLookup.length; ++i) {
           	var item = DistributionLookup[i];
 			if (norm_id == item[0]) {
@@ -212,5 +392,5 @@ class EffectivenessProfileNormsDistribution {
 				}
 			}
 		}
-	}
+	}*/
 }

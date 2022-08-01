@@ -122,12 +122,16 @@ class RequestHandler {
 			if ( Config.PreviousWave != null )
 				config.comparators.push ( "Internal.Wave:" + Config.PreviousWave );
 			
-			if ( Config.Norms.IndustryBenchmark != null)
+/*			if ( Config.Norms.IndustryBenchmark != null)
 				config.comparators.push ( "External.IndustryBenchmark" );
 			
 			if ( Config.Norms.HighPerformers != null)
 				config.comparators.push ( "External.HighPerformers" );
-			
+*/
+          for (var key in Config.DefaultNorms) {
+				config.comparators.push ( "External."+ key );
+          }
+            
       	Debug.Log ('RH 1.2');
           
 			// Metrics (for Flip Cards)
@@ -344,9 +348,18 @@ class RequestHandler {
       	Debug.Log ('RH 1.11');
           
 		    // External Comps        
-            comp['External.HighPerformers'] = {Label: resource_texts['comparators.External_HighPerformers'].Label};
-            comp['External.IndustryBenchmark'] = {Label: resource_texts['comparators.External_IndustryBenchmark'].Label};
-         
+//            comp['External.HighPerformers'] = {Label: resource_texts['comparators.External_HighPerformers'].Label};
+//            comp['External.IndustryBenchmark'] = {Label: resource_texts['comparators.External_IndustryBenchmark'].Label};
+          	
+            for(var key in Config.Norms){
+              var externalLabel =  resource_texts['comparators.External_'+key];
+			  var externalKey = 'External.'+key;
+                
+              externalLabel !== undefined 
+                ? comp[externalKey] = {Label: externalLabel.Label}
+         	    : comp[externalKey] = {Label: 'Missing label'};
+            }
+          
       	Debug.Log ('RH 1.12');
 
           // Fun Facts
