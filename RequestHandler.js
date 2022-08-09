@@ -315,9 +315,13 @@ class RequestHandler {
           
             var comment_questions = {};
             for (var i=0; i<Config.Comments.length; ++i) {
-              var comment_qid = Config.Comments[i];
-              var q = SurveyMetaData.GetQuestion(report, 'ds0', comment_qid); //: Question = project.GetQuestion ( comment_qid );
-              comment_questions[ comment_qid ] = {Label: q.Label};
+              var comment_qid = Config.Comments[i].Question;
+              try {
+                  var q = SurveyMetaData.GetQuestion(report, 'ds0', comment_qid); //: Question = project.GetQuestion ( comment_qid );
+                  comment_questions[ comment_qid ] = {Label: q.Label};
+              } catch(e) {
+                Debug.Log ('ERROR: \nError in Comments config variable \n' + e);
+              }
             }
             
       	Debug.Log ('RH 1.7');
@@ -415,14 +419,18 @@ class RequestHandler {
           	// Assumption is that all comment questions use the same list
             if ( Config.Comments.length > 0 ) {
                 var categories = {};
-              	var qid = Config.Comments[0] + 'Theme'; // grab the first question and use its answer list
-              	var map = SurveyMetaData.GetAnswerMap ( report, 'ds0', qid );
-                for (key in map) {
-                  var answer: Answer = map[key];
-                  categories[key] = {Label: answer.Text};
+                var qid = Config.Comments[0].QuestionCategory; // grab the first question and use its answer list
+            
+                try {
+              	    var map = SurveyMetaData.GetAnswerMap ( report, 'ds0', qid );
+                    for (key in map) {
+                        var answer: Answer = map[key];
+                        categories[key] = {Label: answer.Text};
+                    }
+                } catch(e) {
+                    Debug.Log ('ERROR: \nError in Comments config variable \n' + e);
                 }
-              
-				meta.CommentCategories = categories;      
+				meta.CommentCategories = categories;    
             }
 
 
@@ -496,7 +504,11 @@ class RequestHandler {
                 case 'CommentCategories.Overall':
 					if ( is_live || is_professional_user ) {
                       if ( Config.Comments.length>0 ) {
-						Append ( newdata, CommentCategories.Data(pageContext) );
+						try {
+						    Append ( newdata, CommentCategories.Data(pageContext) );
+                        } catch(e) {
+                            Debug.Log ('ERROR: \nError in Comments config variable \n' + e);
+                        }
 						timer.Add('CommentCategories.Overall');
                       }
 					}
