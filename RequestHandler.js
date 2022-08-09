@@ -119,7 +119,14 @@ class RequestHandler {
 				EnablementDimensionId: Config.EnablementDimensionId,
 				
 				// Styles
-				"styles": Config.Styles
+				"styles": Config.Styles,
+              
+                // PPT export
+                DimensionsPerSlide: Config.DimensionsPerSlide,
+              
+                // Personalized filter question
+                PFQ: Config.PFQ
+              
 			};
 			
 			if ( Config.PreviousWave != null )

@@ -16,12 +16,8 @@ class HelperUtil {
 		hidedata: true
 	});
 
-	switch (breakdown_qid.toUpperCase()) {
-
-		case 'ORGCODE':
-        	ApplyHierarchySettings ( hq );
-			break;
-	}  
+	if (breakdown_qid == Config.PFQ) ApplyHierarchySettings ( hq );
+    
     return hq;
   }
   
