@@ -9,10 +9,10 @@ class Dimensions_Breakdown {
     var o = {};
 
     // Loop over segments
-    var segments = SegmentUtil.GetSegments( page_context );
-    var hash = HelperUtil.FilterHashCode( page_context );
+    //var segments = SegmentUtil.GetSegments( page_context );
+    //var hash = HelperUtil.FilterHashCode( page_context );
     
-	// Loop over outer segements
+	// Loop over outer segments
 	for (var main_key in outer_segments) {
 		// main_key example: "ITEMSX.2020.389.0.GENDER"
 		var key = main_key.split('ITEMSX.').join(CacheKey + '.'); // example: "DIMSX.2020.389.0.GENDER"
@@ -24,8 +24,8 @@ class Dimensions_Breakdown {
 			var segment_data = segments_data[segment_key]; // example: { 'AV01': {N: ..., Dist: {...}}, 'AV02': ...}
 
 			// Loop over dimensions
-			for (var i=0; i<Config.Dimensions.length; ++i) {
-				var d = Config.Dimensions[i];
+			for (var i=0; i<Config.Report.Dimensions.length; ++i) {
+				var d = Config.Report.Dimensions[i];
 				var dimension = new Dimension ( d.Id, d.Questions, segment_data, page_context );
 				o[key][segment_key][d.Id] = dimension.Props();
 			}

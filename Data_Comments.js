@@ -8,7 +8,7 @@ class Comments {
       	var report = page_context.Items['Report'];
       
 		var node_id = user.PersonalizedReportBase;
-		var wave_id = Config.CurrentWave;
+		var wave_id = Config.Report.CurrentWave;
 		var filter_hash = Hash( page_context );
       
       	var key = CacheKey; // example: "COMM"
@@ -23,8 +23,8 @@ class Comments {
 
       	var o = {};
       
-        for (var i=0; i<Config.Comments.length; ++i) {
-          var qid = Config.Comments[i].Question; // example: "Comm1"
+        for (var i=0; i<Config.Report.Comments.length; ++i) {
+          var qid = Config.Report.Comments[i].Question; // example: "Comm1"
           var key = [CacheKey, wave_id, node_id, qid.toUpperCase(), filter_hash].join('.');
           // example: "COMM.2020.389.COMM1.0"
           o[key] = [];
@@ -32,7 +32,7 @@ class Comments {
           for (var j=0; j<records.length; ++j) {
             var comment = records[j][qid];
             if ( comment != "" && comment != null) {
-              var category = records[j][Config.Comments[i].QuestionCategory];
+              var category = records[j][Config.Report.Comments[i].QuestionCategory];
                o[key].push(
                  {
                   Comment: comment, 
@@ -44,11 +44,11 @@ class Comments {
         }
       
       	// Privacy Handler
-        for (var i=0; i<Config.Comments.length; ++i) {
-          var qid = Config.Comments[i].Question; // example: "Comm1"
+        for (var i=0; i<Config.Report.Comments.length; ++i) {
+          var qid = Config.Report.Comments[i].Question; // example: "Comm1"
           var key = [CacheKey, wave_id, node_id, qid.toUpperCase(), filter_hash].join('.');
           // example: "COMM.2020.389.COMM1.0"
-          if ( o[key].length < Config.Privacy.Verbatim.MinN)
+          if ( o[key].length < Config.Report.Privacy.Verbatim.MinN)
             o[key] = [];//'Too Few Responses'];
         }
       

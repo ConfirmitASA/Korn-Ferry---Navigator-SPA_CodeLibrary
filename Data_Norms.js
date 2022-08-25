@@ -91,7 +91,7 @@ class Norms {
               }
             };
 		}*/
-        var configNorms = Config.Norms;
+        var configNorms = Config.Report.Norms;
         for(var key in configNorms){  
           var currNorm = configNorms[key]
             ep_map[currNorm] = ep_norms[currNorm];

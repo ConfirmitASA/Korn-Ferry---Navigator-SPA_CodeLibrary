@@ -19,7 +19,7 @@ class NSQ {
               // Multi Select Question
               for (var category_key in o.CAT) {
                   var x = o.CAT[category_key];
-                  if ( x.N < Config.Privacy.Table.MinN ) {
+                  if ( x.N < Config.Report.Privacy.Table.MinN ) {
                     for (var mykey in x)
                       x[mykey] = null;
                   }
@@ -27,7 +27,7 @@ class NSQ {
           }
           else {
               // Single Select Question
-            if ( o.N < Config.Privacy.Table.MinN ) {
+            if ( o.N < Config.Report.Privacy.Table.MinN ) {
               o.N = null;
               for (var mykey in o.Dist) o.Dist[mykey].N = null;
             }

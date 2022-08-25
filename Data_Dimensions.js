@@ -20,8 +20,8 @@ class Dimensions {
       var segment_data = raw_items[items_key];
       
       // Loop over dimensions
-      for (var i=0; i<Config.Dimensions.length; ++i) {
-        var d = Config.Dimensions[i];
+      for (var i=0; i<Config.Report.Dimensions.length; ++i) {
+        var d = Config.Report.Dimensions[i];
         var dimension = new Dimension ( d.Id, d.Questions, segment_data, page_context );
         o[key][d.Id] = dimension.Props();
       }

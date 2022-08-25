@@ -16,7 +16,7 @@ class HelperUtil {
 		hidedata: true
 	});
 
-	if (breakdown_qid == Config.PFQ) ApplyHierarchySettings ( hq );
+	if (breakdown_qid == Config.Report.PFQ) ApplyHierarchySettings ( hq );
     
     return hq;
   }
@@ -29,7 +29,7 @@ class HelperUtil {
   
 
   static function GetLiveDate() {
-    var parts = Config.LiveDate.split('-');
+    var parts = Config.Report.LiveDate.split('-');
     var year = parseInt(parts[0]);
     var month = parseInt(parts[1], 10) - 1;
     var date = parseInt(parts[2]);
@@ -115,7 +115,7 @@ class HelperUtil {
       var map = SurveyMetaData.GetAnswerMap(report, 'ds0', 'Wave');
       var o = [];
       for (var key in map)
-        if ( key != Config.CurrentWave ) o.push ( key ); 
+        if ( key != Config.Report.CurrentWave ) o.push ( key ); 
 
       GlobalObjects.TrendCodes = o;
     }

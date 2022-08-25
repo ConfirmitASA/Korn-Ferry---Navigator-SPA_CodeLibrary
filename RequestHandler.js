@@ -27,6 +27,8 @@ class RequestHandler {
 
     function Append ( a, b ) {
       //Debug.Log('Append');
+									   
+	   
       for (var key in b) {
           //Debug.Log ('Appending: ' + key);
           a[key] = b[key];
@@ -40,7 +42,7 @@ class RequestHandler {
         timer.Add('Render');
 
       	var now = new Date();
-      	var live_date = new Date(Config.LiveDate);
+      	var live_date = new Date(Config.Report.LiveDate);
       
       	var is_live = HelperUtil.IsLive ( pageContext );
 		
@@ -94,58 +96,61 @@ class RequestHandler {
 			config = {
 				
 				// Action Planner
-				ActionPlannerUrl: Config.ActionPlanner.Url,
-				ActionPlannerDateFormat: Config.ActionPlanner.DateFormat,
-				LimitActionsPerPlan: Config.ActionPlanner.LimitActionsPerPlan,
+				ActionPlannerUrl: Config.Report.ActionPlanner.Url,
+				ActionPlannerDateFormat: Config.Report.ActionPlanner.DateFormat,
+				LimitActionsPerPlan: Config.Report.ActionPlanner.LimitActionsPerPlan,
 				
 				// Norms
-				Norms: Config.Norms,
+				Norms: Config.Report.Norms,
 				
 				// Waves
-				CurrentWave: Config.CurrentWave,
-				PreviousWave: Config.PreviousWave,
+				CurrentWave: Config.Report.CurrentWave,
+				PreviousWave: Config.Report.PreviousWave,
 				
 				// SigTest
-				SigTest: Config.SigTest,
+				SigTest: Config.Report.SigTest,
 				
 				// Comparators (to be checked by default -- will be updated below
 				comparators: [], //["Internal.Wave:2019", "External.IndustryBenchmark", "External.HighPerformers"],
               
                 // limit of active external benchmarks shown on the card
-                ExternalCardLimit: Config.ExternalCardLimit,
+                ExternalCardLimit: Config.Report.ExternalCardLimit,
 				
 				// Dimensions
-				EngagementDimensionId: Config.EngagementDimensionId,
-				EnablementDimensionId: Config.EnablementDimensionId,
+				EngagementDimensionId: Config.Report.EngagementDimensionId,
+				EnablementDimensionId: Config.Report.EnablementDimensionId,
 				
 				// Styles
-				"styles": Config.Styles,
+				"styles": Config.Report.Styles,
               
                 // PPT export
-                DimensionsPerSlide: Config.DimensionsPerSlide,
+                DimensionsPerSlide: Config.Report.DimensionsPerSlide,
               
                 // Personalized filter question
-                PFQ: Config.PFQ
+                PFQ: Config.Report.PFQ, 
               
-			};
+                // External images file library 
+                FileLib: Config.FileLibraryRootURL
+              
+			  };
 			
-			if ( Config.PreviousWave != null )
-				config.comparators.push ( "Internal.Wave:" + Config.PreviousWave );
+			if ( Config.Report.PreviousWave != null )
+				config.comparators.push ( "Internal.Wave:" + Config.Report.PreviousWave );
 			
-/*			if ( Config.Norms.IndustryBenchmark != null)
+/*			if ( Config.Report.Norms.IndustryBenchmark != null)
 				config.comparators.push ( "External.IndustryBenchmark" );
 			
-			if ( Config.Norms.HighPerformers != null)
+			if ( Config.Report.Norms.HighPerformers != null)
 				config.comparators.push ( "External.HighPerformers" );
 */
-          for (var key in Config.DefaultNorms) {
+          for (var key in Config.Report.DefaultNorms) {
 				config.comparators.push ( "External."+ key );
           }
             
       	Debug.Log ('RH 1.2');
           
 			// Metrics (for Flip Cards)
-          	newdata.Metrics = Config.Metrics;
+          	newdata.Metrics = Config.Report.Metrics;
           
       	Debug.Log ('RH 1.3');
           
@@ -314,8 +319,8 @@ class RequestHandler {
       	Debug.Log ('RH 1.6');
           
             var comment_questions = {};
-            for (var i=0; i<Config.Comments.length; ++i) {
-              var comment_qid = Config.Comments[i].Question;
+            for (var i=0; i<Config.Report.Comments.length; ++i) {
+              var comment_qid = Config.Report.Comments[i].Question;
               try {
                   var q = SurveyMetaData.GetQuestion(report, 'ds0', comment_qid); //: Question = project.GetQuestion ( comment_qid );
                   comment_questions[ comment_qid ] = {Label: q.Label};
@@ -349,7 +354,7 @@ class RequestHandler {
             var a_wave = q_wave.GetAnswers();
             for (var i=0; i<a_wave.length; ++i) {
                 var a : Answer = a_wave[i];
-              	if ( a.Precode != Config.CurrentWave)
+              	if ( a.Precode != Config.Report.CurrentWave)
                   comp['Internal.Wave:' + a.Precode] = {Label: a.Text};
                   //"Internal.Wave:2019": { Label: "Trend 2019" }
             }
@@ -365,7 +370,7 @@ class RequestHandler {
 //            comp['External.HighPerformers'] = {Label: resource_texts['comparators.External_HighPerformers'].Label};
 //            comp['External.IndustryBenchmark'] = {Label: resource_texts['comparators.External_IndustryBenchmark'].Label};
           	
-            for(var key in Config.Norms){
+            for(var key in Config.Report.Norms){
               var externalLabel =  resource_texts['comparators.External_'+key];
 			  var externalKey = 'External.'+key;
                 
@@ -394,10 +399,10 @@ class RequestHandler {
 			  CommentQuestions: comment_questions,
               NonStandardQuestions: Temp.NSQ( pageContext ),
               Comparators: comp,
-              CurrentWave: Config.CurrentWave,
-              PreviousWave: Config.PreviousWave,
+              CurrentWave: Config.Report.CurrentWave,
+              PreviousWave: Config.Report.PreviousWave,
               ReportName: report.Name,
-              ClientName: Config.ClientName,
+              ClientName: Config.Report.ClientName,
               Items: Temp.Items2( report ),
               Dimensions: Temp.Dimensions( resource_texts ),
               Labels: labels,
@@ -416,23 +421,32 @@ class RequestHandler {
           
           
           	// Comment Categories
-          	// Assumption is that all comment questions use the same list
-            if ( Config.Comments.length > 0 ) {
-                var categories = {};
-                var qid = Config.Comments[0].QuestionCategory; // grab the first question and use its answer list
-            
-                try {
-              	    var map = SurveyMetaData.GetAnswerMap ( report, 'ds0', qid );
-                    for (key in map) {
-                        var answer: Answer = map[key];
-                        categories[key] = {Label: answer.Text};
-                    }
-                } catch(e) {
-                    Debug.Log ('ERROR: \nError in Comments config variable \n' + e);
-                }
-				meta.CommentCategories = categories;    
-            }
+			meta.CommentCategories = {};
+			for (var i=0; i<Config.Report.Comments.length; ++i) {
+				var comment = Config.Report.Comments[i];
+				var qid_coded = comment.QuestionCategory; // example: "Comm1Theme"
+				
+				if ( qid_coded != null ) {
+					
+					// This question is coded
+					var categories = {};
+					var qid = comment.Question; // example: "Comm1"
+				
+					try {
+						var map = SurveyMetaData.GetAnswerMap ( report, 'ds0', qid_coded );
+						for (key in map) {
+							var answer: Answer = map[key];
+							categories[key] = {Label: answer.Text};
+						}
+					} catch(e) {
+						Debug.Log ('ERROR: \nError in Comments config variable \n' + e);
+				 
+											
+					}
 
+					meta.CommentCategories[qid] = categories;    				
+				}
+			}
 
           	// Demographics
           	meta.Demographics = Filters( user ).Items;
@@ -463,7 +477,7 @@ class RequestHandler {
             Email: user.Email,
             PersonalizedReportBase: user.PersonalizedReportBase + '',
             PersonalizedReportBaseText: (user.PersonalizedReportBaseText[0] + ''),
-	        Role: (user.UserType == ReportUserType.Confirmit) ? Config.ProfessionalUserRole : user.Roles.join('.')
+	        Role: (user.UserType == ReportUserType.Confirmit) ? Config.Report.ProfessionalUserRole : user.Roles.join('.')
         };
 
         newdata.User = u;
@@ -503,7 +517,7 @@ class RequestHandler {
                 // Comment Categories
                 case 'CommentCategories.Overall':
 					if ( is_live || is_professional_user ) {
-                      if ( Config.Comments.length>0 ) {
+                      if ( Config.Report.Comments.length>0 ) {
 						try {
 						    Append ( newdata, CommentCategories.Data(pageContext) );
                         } catch(e) {
@@ -518,7 +532,7 @@ class RequestHandler {
                 // Comments
                 case 'Comments':
 					if ( is_live || is_professional_user ) {
-                      if ( Config.Comments.length>0 ) {
+                      if ( Config.Report.Comments.length>0 ) {
 						Append ( newdata, Comments.Data(pageContext) );
 						timer.Add('Comments');
                       }
@@ -552,7 +566,7 @@ class RequestHandler {
                 // ENPS
                 case 'ENPS.Overall':
 					if ( is_live || is_professional_user ) {
-                        if ( Config.ENPS.VariableId != null ) {
+                        if ( Config.Report.ENPS.VariableId != null ) {
                           Append ( newdata, ENPS.Data(pageContext));
                           timer.Add('ENPS.Overall');
                         }
@@ -562,7 +576,7 @@ class RequestHandler {
                 // ENPS Breakdown
                 case 'ENPS.Breakdown':
 					if ( is_live || is_professional_user ) {
-                        if ( Config.ENPS.VariableId != null ) {
+                        if ( Config.Report.ENPS.VariableId != null ) {
                           pageContext.Items['Breakdown'] = request.Breakdown;
                           Append ( newdata, ENPS_Breakdown.Data ( pageContext ) );
                           timer.Add('ENPS.Breakdown');
@@ -608,7 +622,7 @@ class RequestHandler {
                 // NSQ - Non Standard Questions (Current Wave only)
                 case 'NSQ':
 					if ( is_live || is_professional_user ) {
-                        if ( Config.NonStandardQuestions.length>0 ) {
+                        if ( Config.Report.NonStandardQuestions.length>0 ) {
                           Append ( newdata, NSQ.Data ( pageContext ) );
                           timer.Add('NSQ');
                         }
@@ -719,7 +733,7 @@ class RequestHandler {
 		var role = AccessControl.GetRole( user )
 		
         var filters = {};
-        var demos = Config.FilterVariables[role];
+        var demos = Config.Report.FilterVariables[role];
         var p: Project = report.DataSource.GetProject('ds0');
         for (var i = 0; i < demos.length; ++i) {
             var q: Question = p.GetQuestion(demos[i]);

@@ -1,5 +1,15 @@
 class CacheUtil {
 
+  static var CONFIG_HASH;
+  
+  static function ConfigHash() {
+    if (CONFIG_HASH == null) {
+    	CONFIG_HASH = HelperUtil.HashCode ( JSON.stringify(Config.Report) );
+    }
+    
+    return CONFIG_HASH;
+  }
+  
   static function GetData ( key, page_context ) {
 
     if ( !HelperUtil.IsLive ( page_context ) ) {
@@ -11,10 +21,10 @@ class CacheUtil {
   	var redis_key = GetRedisKey( key );
     var s = GlobalObjects.Confirmit.ReportDataCache ( redis_key );
     if (s == null) {
-      Debug.Log ( 'Read: ' + key + ' - NOT FOUND IN REDIS' );
+      //Debug.Log ( 'Read: ' + key + ' - NOT FOUND IN REDIS' );
       return null; // not found
     }
-    Debug.Log ( 'Read: ' + key + ' - FOUND IN REDIS' );
+    //Debug.Log ( 'Read: ' + key + ' - FOUND IN REDIS' );
 
     // Found, turn into JSON object
     var tmp;
@@ -32,16 +42,20 @@ class CacheUtil {
     var s = JSON.stringify ( obj );
 
     page_context.Items[key] = obj;
-    Debug.Log ('Save PAGE CONTEXT: ' + key);
+    //Debug.Log ('Save PAGE CONTEXT: ' + key);
     
   	var redis_key = GetRedisKey( key );
-    Debug.Log ('Save REDIS: ' + key + ' Length=' + s.length);
+    //Debug.Log ('Save REDIS: ' + key + ' Length=' + s.length);
     GlobalObjects.Confirmit.ReportDataCache ( redis_key, s, Config.CacheTimeout );
 
   }
   
   private static function GetRedisKey( key ) {
-  	return Config.CacheKeyPrefix + '.' + key;
+  	return [
+      ConfigHash(),
+      Config.Report.CacheKeyPrefix,
+      key
+    ].join('.');
   }
   
 

@@ -8,7 +8,7 @@ class CommentCategories {
       	var report = page_context.Items['Report'];
       
 		var node_id = user.PersonalizedReportBase;
-		var wave_id = Config.CurrentWave;
+		var wave_id = Config.Report.CurrentWave;
 		var filter_hash = Hash( page_context );
       
 		var key = HelperUtil.Key(CacheKey, wave_id, node_id, filter_hash);
@@ -45,7 +45,7 @@ class CommentCategories {
       	// Privacy / Min N
         for (var key in data) {
             var obj = data[key]; // data for one segment
-            Privacy.ApplyItemsMinN ( obj, Config.Privacy.Verbatim.MinN );
+            Privacy.ApplyItemsMinN ( obj, Config.Report.Privacy.Verbatim.MinN );
         }
       
       	return data;

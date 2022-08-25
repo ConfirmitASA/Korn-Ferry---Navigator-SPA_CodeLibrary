@@ -60,6 +60,19 @@ class StyleUtil {
           
         '.flip-icon {right: unset; left: 0}' +
           
+            // hierarchy component rtl
+        '.dd-search-input { text-align: start; padding: 10px; }' +
+        '.reportal-clearfix { display: flex; flex-direction: row; }' +
+        '.dd-header li a { background: none; position: relative; padding: 1px 10px 1px 15px;}' +
+        '.dd-header li a:before { content: " "; position: absolute; background: url(/cf_clientutil/images/drilldown/arrow_gray_right.gif) no-repeat 100%; width: 16px; height: 16px; line-height: 16px; transform: rotate(180deg); left: 0px; }' +
+        '.dd-item-text { padding: 8px 10px 8px 10px; display: block; text-align: start; }' +
+        '.dd-parent-a .dd-expand { border: none; position: unset; }' +
+        '.dd-expand-icon { left: -45%; transform: rotate(180deg); }' +
+        '.dd-parent-a > .dd-item-text { width: 100%; border-left: 1px solid #ccc;}' +
+        '.dd-parent-a { display: flex !important; flex-direction: row; }' +
+        '.dd-parent-a:hover { background-color: #efefef; }' +
+        '.dd-item-text:hover { background-color: #efefef; }' +
+          
        '</style>';
   }
 

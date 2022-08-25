@@ -1,25 +1,43 @@
 class SegmentUtil {
  
+  static function SuppressInternalComparators( pageContext ) {
+	// If this is a Breakdown query, we don't want parent and top comparators included segments
+    // due to unwanted side effects	(and also performance as the queries aren't needed)
+    
+    if ( pageContext.Items['SuppressInternalComparators'] == null) {
+      
+      var q = pageContext.Items['Query'];
+      
+      var is_breakdown = false;
+      for (var i=0; i<q.DataRequest.length; ++i) {
+        if ( q.DataRequest[i].Type.split('.').pop() == 'Breakdown' )
+            is_breakdown = true;
+      }
+      pageContext.Items['SuppressInternalComparators'] = is_breakdown;
+	}
+    return pageContext.Items['SuppressInternalComparators'];
+  }
+  
   static function GetAllSegmentsExpression ( pageContext ) {
     
-    Debug.Log ('GetAllSegmentsExpression 1');
+    //Debug.Log ('GetAllSegmentsExpression 1');
     
   	var o = [];
     var segments = GetSegments ( pageContext );
     
-    Debug.Log ('GetAllSegmentsExpression 2');
+    //Debug.Log ('GetAllSegmentsExpression 2');
     
     for (var i=0; i<segments.length; ++i)
       	o.push ( segments[i].Expression() );
     
-    Debug.Log ('GetAllSegmentsExpression 3');
+    //Debug.Log ('GetAllSegmentsExpression 3');
     
     return '(' + o.join( '+' ) + ')';
   }
   
   static function GetSegments( pageContext ) {
     
-    Debug.Log ('GetSegments - BEGIN');
+    //Debug.Log ('GetSegments - BEGIN');
     
     var segments = [];
     var user = pageContext.Items[ 'User' ];
@@ -28,35 +46,37 @@ class SegmentUtil {
     var map = HelperUtil.HierarchyMap( pageContext );
         
     // Current Year: Current Node
-    Debug.Log ('CurrentId: ' + current_branch_id);
-    Debug.Log ( map[current_branch_id] == null ? 'NULL' : map[current_branch_id].Label );
+    //Debug.Log ('CurrentId: ' + current_branch_id);
+    //Debug.Log ( map[current_branch_id] == null ? 'NULL' : map[current_branch_id].Label );
 
-    segments.push ( new WaveNode2(Config.CurrentWave, current_branch_id, report ) );
+    segments.push ( new WaveNode2(Config.Report.CurrentWave, current_branch_id, report ) );
     
-    // Current Year: Parent Node (if applicable)
-    Debug.Log ('Checking parent segment');
-    var parent = map[current_branch_id].Parent;
-    if ( parent != null && parent.Id != '-1' ) {
-      Debug.Log ('ParentId: ' + parent.Id + ': ' + parent.Label );
-      segments.push ( new WaveNode2(Config.CurrentWave, parent.Id, report) );
+    if ( !SuppressInternalComparators( pageContext )) {
+      // Current Year: Parent Node (if applicable)
+      //Debug.Log ('Checking parent segment');
+      var parent = map[current_branch_id].Parent;
+      if ( parent != null && parent.Id != '-1' ) {
+        //Debug.Log ('ParentId: ' + parent.Id + ': ' + parent.Label );
+        segments.push ( new WaveNode2(Config.Report.CurrentWave, parent.Id, report) );
+      }
+      
+      // Current Year: Top Node
+      Debug.Log ('Checking top node');
+      var top_node = map['-1'].Children[0]; // should always be length 0
+      if (top_node.Id != parent.Id && top_node.Id != current_branch_id) {
+        //Debug.Log ('top_node.Id: ' + top_node.Id + ': ' + top_node.Label );
+        segments.push ( new WaveNode2(Config.Report.CurrentWave, top_node.Id, report ) );
+      }
     }
-    
-    // Current Year: Top Node
-    Debug.Log ('Checking top node');
-    var top_node = map['-1'].Children[0]; // should always be length 0
-    if (top_node.Id != parent.Id && top_node.Id != current_branch_id) {
-      Debug.Log ('top_node.Id: ' + top_node.Id + ': ' + top_node.Label );
-      segments.push ( new WaveNode2(Config.CurrentWave, top_node.Id, report ) );
-    }
-    
+  
     // Previous Years: Current Branch
-    Debug.Log ('Adding waves');
+    //Debug.Log ('Adding waves');
     var trend_codes = HelperUtil.GetTrendCodes2( report );
     for (var i=0; i<trend_codes.length; ++i) {
       segments.push ( new WaveNode2(trend_codes[i], current_branch_id, report ) );
     }  
     
-    Debug.Log ('GetSegments - END');
+    //Debug.Log ('GetSegments - END');
     return segments;
   }
   
@@ -83,6 +103,6 @@ class SegmentUtil {
   }
   
   static function CurrentWave() {
-  	return 'Wave="' + Config.CurrentWave  + '"';
+  	return 'Wave="' + Config.Report.CurrentWave  + '"';
   }
 }

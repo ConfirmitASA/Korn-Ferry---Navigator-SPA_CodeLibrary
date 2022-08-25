@@ -4,7 +4,7 @@ class ResponseRate {
   
   static function Data( page_context ) {
       var user = page_context.Items['User'];
-      var key = [ CacheKey, Config.CurrentWave, user.PersonalizedReportBase ].join('.'); // example: RR.2020.12345
+      var key = [ CacheKey, Config.Report.CurrentWave, user.PersonalizedReportBase ].join('.'); // example: RR.2020.12345
       var report = page_context.Items['Report'];
       var is_live = HelperUtil.IsLive ( page_context );
     
@@ -26,7 +26,7 @@ class ResponseRate {
       var response_rate = {};
       response_rate[key] = {
         Completes: data[0],
-        Total: Config.ResponseRateReporting.SelfReportedHierarchyNode
+        Total: Config.Report.ResponseRateReporting.SelfReportedHierarchyNode
           	? CountsByNode.Map[ user.PersonalizedReportBase ]
           	: data[1]
       };

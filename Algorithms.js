@@ -6,7 +6,7 @@ class Algorithms {
 		var user = pageContext.Items['User'];
 		var node_id = user.PersonalizedReportBase;
 
-		var kda_key = HelperUtil.Key('KDA', Config.CurrentWave, node_id); // Example: 'KDA.2020.389' (not affected by filters)
+		var kda_key = HelperUtil.Key('KDA', Config.Report.CurrentWave, node_id); // Example: 'KDA.2020.389' (not affected by filters)
 
 		var kda = CacheUtil.GetData(kda_key, pageContext);
 
@@ -78,7 +78,7 @@ class Algorithms {
 		var user = pageContext.Items['User'];
 		var filter_hash = HelperUtil.FilterHashCode(pageContext);
 
-		var so_key = HelperUtil.Key('SO', Config.CurrentWave, user.PersonalizedReportBase, filter_hash);
+		var so_key = HelperUtil.Key('SO', Config.Report.CurrentWave, user.PersonalizedReportBase, filter_hash);
 
 		// Try reading from cache
 		var so = CacheUtil.GetData(so_key, pageContext);
@@ -91,24 +91,24 @@ class Algorithms {
 
 			// Current Items
 			//Debug.Log('SO 2');
-			var key = HelperUtil.Key('ITEMS', Config.CurrentWave, user.PersonalizedReportBase, filter_hash);
+			var key = HelperUtil.Key('ITEMS', Config.Report.CurrentWave, user.PersonalizedReportBase, filter_hash);
 			var current_item_data = data[key];
 
 			// Internal Comparator
 			//Debug.Log('SO 3');
-			var internal_comparator_key = HelperUtil.Key('ITEMS', Config.CurrentWave, top_node_id, filter_hash);
+			var internal_comparator_key = HelperUtil.Key('ITEMS', Config.Report.CurrentWave, top_node_id, filter_hash);
 			var internal_comparator_data = data[internal_comparator_key]; // Company Overall data with demographic filter applied
 
 			// External Comparator
 			//Debug.Log('SO 4');
 			var all_norms_data = Norms.Data(pageContext);
-			var norms_key = ['NORMS', Config.Norms.IndustryBenchmark, filter_hash].join('.');
+			var norms_key = ['NORMS', Config.Report.Norms.IndustryBenchmark, filter_hash].join('.');
 			var industry_norms_data = all_norms_data[norms_key];
 
 			// Look up questions for exclusion
 			//Debug.Log('SO 5');
 			var exclude_map = {};
-			var qids = Config.Algorithm.ExcludedQuestions;
+			var qids = Config.Report.Algorithm.ExcludedQuestions;
 			for (var i = 0; i < qids.length; ++i)
 				exclude_map[qids[i]] = 1;
 

@@ -1,7 +1,7 @@
 class Privacy {
   
     static function ApplyMinN ( obj, min_n ) {
-      if ( min_n == null ) min_n = Config.Privacy.Table.MinN; // default
+      if ( min_n == null ) min_n = Config.Report.Privacy.Table.MinN; // default
       var count = (obj.N == null ) ? DataUtil.Count ( obj.Dist ) : obj.N;
 
       if ( count < min_n ) {

@@ -44,7 +44,7 @@ class Dimension {
 			? HelperUtil.Count ( item.Dist )
 			: item.N;
 			
-		  if ( !is_norm && item_N < Config.Privacy.Table.MinN ) {
+		  if ( !is_norm && item_N < Config.Report.Privacy.Table.MinN ) {
 			  properties = {
 				Dist: {Fav: null, Neu: null, Unfav: null},
 				N: null

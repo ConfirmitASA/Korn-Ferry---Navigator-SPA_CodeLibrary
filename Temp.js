@@ -4,8 +4,8 @@ class Temp {
 		var report = pageContext.Items('Report');
 		
 		var nsq = {};
-		for (var i=0; i<Config.NonStandardQuestions.length; ++i) {
-			var nsq_id = Config.NonStandardQuestions[i]; // example: "NSQ01"
+		for (var i=0; i<Config.Report.NonStandardQuestions.length; ++i) {
+			var nsq_id = Config.Report.NonStandardQuestions[i]; // example: "NSQ01"
 			var q = SurveyMetaData.GetQuestion(report, 'ds0', nsq_id);
 			var answer_map = SurveyMetaData.GetAnswerMap ( report, 'ds0', nsq_id );
 			var tmp = {};
@@ -108,23 +108,27 @@ class Temp {
 
 /*
 
-In Config.Dimensions: [ ...
+In Config.Report.Dimensions: [ ...
     {Id:'DIM_ENG', Questions:['OM12','OM01','OM11','OS02','OM06'],Tier:1}, //Employee Engagement
     {Id:'DIM_ENA', Questions:['WE12','JS05','JS02','WE08'],Tier:2}, //Employee Enablement
 */  
 
-    for (var i=0; i<Config.Dimensions.length; ++i) {
-      var dim = Config.Dimensions[i];
+    for (var i=0; i<Config.Report.Dimensions.length; ++i) {
+      try {
+          var dim = Config.Report.Dimensions[i];
       
-      var front = rt['KeyMetric_BackCardText.' + dim.Id ];
-      var more = rt['KeyMetric_MoreCardText.' + dim.Id ];
+          var front = rt['KeyMetric_BackCardText.' + dim.Id ];
+          var more = rt['KeyMetric_MoreCardText.' + dim.Id ];
       
-      o[ dim.Id ] = {
-        Items: dim.Questions,
-        Label: rt['dimensions.' + dim.Id].Label,
-        KeyMetric_BackCardText: (front == null) ? 'MISSING_TEXT' : front.Label,
-        KeyMetric_MoreCardText: (more == null) ? 'MISSING_TEXT' : more.Label
-      };      
+          o[ dim.Id ] = {
+              Items: dim.Questions,
+              Label: rt['dimensions.' + dim.Id].Label,
+              KeyMetric_BackCardText: (front == null) ? 'MISSING_TEXT' : front.Label,
+              KeyMetric_MoreCardText: (more == null) ? 'MISSING_TEXT' : more.Label
+          };
+      } catch (e) {
+          Debug.Log ('ERROR: \nError in Dimensions config variable \n' + e);
+      }
       
     }
     

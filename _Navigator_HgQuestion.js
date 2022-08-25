@@ -24,7 +24,7 @@ class HgQuestion {
 		m_is_kda = is_kda;
 		m_comparators = comparators;
 
-		m_is_suppressed = item.N < Config.Privacy.Table.MinN;
+		m_is_suppressed = item.N < Config.Report.Privacy.Table.MinN;
 
 		CalculateStrengthScore();
 	}
@@ -124,7 +124,7 @@ class HgQuestion {
 
 				// Apply KDA multiplier if it's a KDA
 				m_score_map['Multiplier'] = m_is_kda ?
-					Config.Algorithm.KeyDriverMultiplier :
+					Config.Report.Algorithm.KeyDriverMultiplier :
 					1;
 
 				strengthScore *= m_score_map['Multiplier'];

@@ -81,7 +81,7 @@ class AccessControl {
   
   static function GetRole ( user ) {
   	return user.UserType == (ReportUserType.Confirmit)
-      ? Config.ProfessionalUserRole  // emulate role
+      ? Config.Report.ProfessionalUserRole  // emulate role
       : user.Roles.join('.');  // End-User: use assigned role
   }
   
@@ -101,7 +101,7 @@ class AccessControl {
             case 'GroupComments':
             case 'CommentsThemes':
             case 'OpenComments':
-              if ( Config.Comments.length>0 )
+              if ( Config.Report.Comments.length>0 )
                 o.push ( key );
               break;
               
@@ -109,12 +109,12 @@ class AccessControl {
             case 'GroupEnps':
             case 'ENPSScore:':
             case 'ENPSBreakdown':
-              if ( Config.ENPS.VariableId != null )
+              if ( Config.Report.ENPS.VariableId != null )
               	o.push ( key );
               break;
               
             case 'NonStandardQuestions':
-              if ( Config.NonStandardQuestions.length>0)
+              if ( Config.Report.NonStandardQuestions.length>0)
                 o.push ( key );
               break;
             
@@ -147,7 +147,7 @@ class AccessControl {
           switch (key) {
               
             case 'Comments':
-              if ( Config.Comments.length>0 ) o.push ( key );
+              if ( Config.Report.Comments.length>0 ) o.push ( key );
               break;
             
             default:

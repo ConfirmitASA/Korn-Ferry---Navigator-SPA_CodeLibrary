@@ -57,7 +57,7 @@ class SigTest {
 		blnValue2IsDiff) {
 		if (blnValue2IsDiff == null) blnValue2IsDiff = true; // default value
 		try {
-			const csngZLimit = Config.SigTest.Threshold; // typically 1.96
+			const csngZLimit = Config.Report.SigTest.Threshold; // typically 1.96
 			var lngValue2Final;
 			var dblPool;
 			var dblZ;

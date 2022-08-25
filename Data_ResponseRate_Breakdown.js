@@ -4,7 +4,7 @@ class ResponseRate_Breakdown {
   
   static function Data( page_context ) {
       var user = page_context.Items['User'];
-      var key = [ CacheKey, Config.CurrentWave, user.PersonalizedReportBase ].join('.'); // example: RRX.2020.389
+      var key = [ CacheKey, Config.Report.CurrentWave, user.PersonalizedReportBase ].join('.'); // example: RRX.2020.389
       var report = page_context.Items['Report'];
     
       // Check Redis Cache
@@ -29,7 +29,7 @@ class ResponseRate_Breakdown {
         var completes = row[0];
         var n = row[1];
         o[node_id] = {
-          N: Config.ResponseRateReporting.SelfReportedHierarchyNode
+          N: Config.Report.ResponseRateReporting.SelfReportedHierarchyNode
           	? CountsByNode.Map[ node_id ]
           	: n,
           C: completes

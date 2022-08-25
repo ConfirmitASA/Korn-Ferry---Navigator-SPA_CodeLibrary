@@ -168,11 +168,11 @@ class DataUtil {
 
     // STEP 1: Look up all requested segments
     var segments = SegmentUtil.GetSegments( page_context );
-
+    
     // STEP 2: Exclude segments where data is cached
     var filter_hash = x.Hash( page_context );
     
-    var segments; 
+    //var segments; 
     var query_segments = [];
     for (var i=0; i<segments.length; ++i) {
       
@@ -338,7 +338,7 @@ class DataUtil {
 	var user = page_context.Items['User'];
 	var key = [
 	  x.CacheKey,
-	  Config.CurrentWave,
+	  Config.Report.CurrentWave,
 	  user.PersonalizedReportBase,
 	  x.Hash(page_context)
 	].join('.'); // example: NSQ.2020.389.0	  
@@ -459,7 +459,7 @@ class DataUtil {
 	  var user = page_context.Items['User'];
 	  var key = [
 		  x.CacheKey,
-		  Config.CurrentWave,
+		  Config.Report.CurrentWave,
 		  node_id,
 		  x.Hash(page_context)
 	  ].join('.'); // example: N.2020.389.0	  
@@ -501,7 +501,7 @@ class DataUtil {
 	  var user = page_context.Items['User'];
 	  var key = [
 		  x.CacheKey,
-		  Config.CurrentWave,
+		  Config.Report.CurrentWave,
 		  user.PersonalizedReportBase,
 		  x.Hash(page_context),
 		  breakdown_variable_id.toUpperCase()
@@ -580,7 +580,7 @@ class DataUtil {
 	  var tname = 'calc:' + table_name;
 	  var t = {};
 	  var values = report.TableUtils.GetPlainTableValues(tname);  
-	  var items = Config.QuestionIds;
+	  var items = Config.Report.QuestionIds;
 	  
 	  for (var i=0; i<items.length; ++i) {
 		
